@@ -9,8 +9,8 @@
     state: icon
   - type: Pullable
   - type: AerialBomb
-    flightTime: 12
-    dispersionRadius: 12
+    flightTime: 16
+    dispersionRadius: 4
     arrivalSound: /Audio/VXS/Artillery/aviabomb.ogg
     preImpactDelay: 3
     impactEntity: BombMarker250
@@ -19,8 +19,8 @@
     fov: 0
     seekerType: INS correction
     warheadType: High explosive Fragmentation
-    flightTime: 12
-    deviation: 12
+    flightTime: 16
+    deviation: 4
     projectileSpeed: 0
     notes: Unguided aerial bomb.
   - type: TriggerOnSignal
@@ -43,6 +43,132 @@
     totalIntensity: 1000
     intensitySlope: 10
     maxIntensity: 50
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ProjectileGrenade
+    triggerKey: trigger
+    fillPrototype: PelletClusterLethalHeavy
+    capacity: 50
+    randomAngle: false
+    MaxVelocity: 15
+    MinVelocity: 10
+  - type: SmokeOnTrigger
+    keysIn:
+    - trigger
+    duration: 10
+    spreadAmount: 20
+  - type: TimedDespawn
+    lifetime: 15
+
+- type: entity
+  id: EAB3000AviaBomb
+  parent: BaseStructureDynamic
+  name: EAB-3000
+  description: An aerial bomb.
+  components:
+  - type: Sprite
+    sprite: VXS/Weapons/Ammunition/Explosives/fab3000.rsi
+    state: icon
+  - type: Pullable
+  - type: AerialBomb
+    flightTime: 8
+    dispersionRadius: 12
+    arrivalSound: /Audio/VXS/Artillery/aviabomb.ogg
+    preImpactDelay: 1
+    impactEntity: BombMarkerFAB3000
+  - type: WeaponMonitoringProfile
+    category: AerialBomb
+    fov: 0
+    seekerType: INS correction
+    warheadType: High explosive Fragmentation
+    flightTime: 8
+    deviation: 12
+    projectileSpeed: 0
+    notes: Unguided aerial bomb.
+  - type: TriggerOnSignal
+    port: Trigger
+
+- type: entity
+  id: BombMarkerFAB3000
+  categories: [ HideSpawnMenu ]
+  name: Bomb marker FAB-3000
+  components:
+  - type: Sprite
+    sprite: /Textures/Objects/Fun/goldbikehorn.rsi
+    visible: false
+    state: icon
+  - type: TriggerOnSpawn
+  - type: DeleteOnTrigger
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: HardBomb
+    totalIntensity: 9000
+    intensitySlope: 8
+    maxIntensity: 90
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ProjectileGrenade
+    triggerKey: trigger
+    fillPrototype: PelletClusterLethalHeavy
+    capacity: 50
+    randomAngle: false
+    MaxVelocity: 15
+    MinVelocity: 10
+  - type: SmokeOnTrigger
+    keysIn:
+    - trigger
+    duration: 10
+    spreadAmount: 20
+  - type: TimedDespawn
+    lifetime: 15
+
+- type: entity
+  id: ODAB9000AviaBomb
+  parent: BaseStructureDynamic
+  name: ODAB-9000
+  description: An aerial bomb.
+  components:
+  - type: Sprite
+    sprite: VXS/Weapons/Ammunition/Explosives/odab9000.rsi
+    state: icon
+  - type: Pullable
+  - type: AerialBomb
+    flightTime: 9
+    dispersionRadius: 12
+    arrivalSound: /Audio/VXS/Artillery/aviabomb.ogg
+    preImpactDelay: 1
+    impactEntity: BombMarkerODAB9000
+  - type: WeaponMonitoringProfile
+    category: AerialBomb
+    fov: 0
+    seekerType: INS correction
+    warheadType: Thermobaric
+    flightTime: 9
+    deviation: 12
+    projectileSpeed: 0
+    notes: Unguided aerial bomb.
+  - type: TriggerOnSignal
+    port: Trigger
+
+- type: entity
+  id: BombMarkerODAB9000
+  categories: [ HideSpawnMenu ]
+  name: Bomb marker ODAB-9000
+  components:
+  - type: Sprite
+    sprite: /Textures/Objects/Fun/goldbikehorn.rsi
+    visible: false
+    state: icon
+  - type: TriggerOnSpawn
+  - type: DeleteOnTrigger
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Thermobaric
+    totalIntensity: 10000
+    intensitySlope: 100
+    maxIntensity: 100
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container

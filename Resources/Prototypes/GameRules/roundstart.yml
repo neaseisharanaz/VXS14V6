@@ -501,11 +501,11 @@
   - type: RoundstartStationVariationRule
     rules:
     - id: SupplyOffbrandItemsVariationPass # Offbrand
-  #  - id: BasicPoweredLightVariationPass
-  #  - id: BasicTrashVariationPass
+    - id: BasicPoweredLightVariationPass
+    - id: BasicTrashVariationPass
     - id: SolidWallRustingVariationPass
     - id: ReinforcedWallRustingVariationPass
-  #  - id: BasicPuddleMessVariationPass
+    - id: BasicPuddleMessVariationPass
       prob: 0.99
       orGroup: puddleMess
     - id: BloodbathPuddleMessVariationPass
@@ -516,8 +516,8 @@
     - id: SolarPanelDamageVariationPass
     - id: SolarPanelEmptyVariationPass
     - id: BasicDecalDirtVariationPass
-  #  - id: BasicDecalGraffitiVariationPass
-  #  - id: BasicDecalBrunsVariationPass
+    - id: BasicDecalGraffitiVariationPass
+    - id: BasicDecalBrunsVariationPass
       prob: 0.50
       orGroup: monospaceDecals
     - id: BasicDecalDirtMonospaceVariationPass

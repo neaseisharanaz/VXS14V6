@@ -71,6 +71,14 @@
   longRange: true
 
 - type: radioChannel
+  id: Solfed
+  name: chat-radio-solfed
+  keycode: 'o'
+  frequency: 1215
+  color: "#5aa4ff"
+  longRange: true
+
+- type: radioChannel
   id: Handheld
   name: chat-radio-handheld
   frequency: 1330

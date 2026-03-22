@@ -27,7 +27,7 @@
   id: SyndyMarksmanGear
   equipment:
     id: DogtagSyndyMarksman
-    ears: ClothingHeadsetAltSyndy
+    ears: ClothingHeadsetAltSyndicate
   storage:
     back:
     - Rangefinder

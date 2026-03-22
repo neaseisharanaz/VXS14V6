@@ -71,6 +71,21 @@
     job: SolfedPilot
 
 - type: entity
+  parent: EncryptionKey
+  id: EncryptionKeySolfed
+  name: solfed encryption key
+  description: An encryption key used by Solfed military units.
+  components:
+  - type: EncryptionKey
+    channels:
+    - Solfed
+    defaultChannel: Solfed
+  - type: Sprite
+    layers:
+    - state: crypt_blue
+    - state: sec_label
+
+- type: entity
   parent: ShoulderboardBase
   id: ShoulderboardSolfedPrivate
   name: PVT shoulderboard # Рядовой

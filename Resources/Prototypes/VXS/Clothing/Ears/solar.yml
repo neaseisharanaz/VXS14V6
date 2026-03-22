@@ -7,6 +7,7 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - EncryptionKeySolfed
       - EncryptionKeyCommand
       - EncryptionKeyCommon
 
@@ -19,4 +20,5 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - EncryptionKeySolfed
       - EncryptionKeyCommon

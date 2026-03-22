@@ -8,6 +8,7 @@
   components:
   - type: Headset
     keys:
+    - EncryptionKeySyndie
     - EncryptionKeyCommon
 
 # Dogtags

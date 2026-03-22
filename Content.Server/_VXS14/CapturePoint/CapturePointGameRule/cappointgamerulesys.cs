@@ -94,17 +94,12 @@ namespace Content.Server.GG.GameTicking.Rules
                 // ===============================================================
                 // 1) Определяем команду по JobId
                 // ===============================================================
-                string team = job switch
-                {
-                    "Syndy" => "Syndy",
-                    "Solfed"    => "Solfed",
-                    _ => "None"
-                };
+                var team = ResolveTeam(job);
 
-                if (team == "None")
+                if (team == null)
                 {
                     Logger.Error($"[CapturePointRule] Неизвестная работа: {job}");
-                    return;
+                    continue;
                 }
 
                 // ===============================================================
@@ -127,7 +122,7 @@ namespace Content.Server.GG.GameTicking.Rules
                 if (!spawnCoords.IsValid(EntityManager))
                 {
                     Logger.Error($"[CapturePointRule] SpawnPoint '{spawnName}' НЕ найден!");
-                    // return;
+                    spawnCoords = Transform(ev.Station).Coordinates;
                 }
 
                 // ===============================================================
@@ -182,6 +177,17 @@ namespace Content.Server.GG.GameTicking.Rules
                 Logger.Info($"[CapturePointRule] Спавн игрока {ev.Player.Name} на '{spawnName}' как {team}");
                 return;
             }
+        }
+
+        private static string? ResolveTeam(string jobId)
+        {
+            if (jobId.StartsWith("Solfed", StringComparison.OrdinalIgnoreCase))
+                return "Solfed";
+
+            if (jobId.StartsWith("Syndy", StringComparison.OrdinalIgnoreCase))
+                return "Syndy";
+
+            return null;
         }
 
         public override void Update(float frameTime)

@@ -123,7 +123,11 @@
   parent: BaseGameRule
   components:
   - type: CapturePointGameRule
-  - type: SendToLobbyOnDeathRule
+  - type: RespawnDeadRule
+    alwaysRespawnDead: true
+  - type: RespawnTracker
+    respawnDelay: 10
+    deleteBody: false
   - type: CaptureTickets
   - type: TicketDisplay
     displayInterval: 60

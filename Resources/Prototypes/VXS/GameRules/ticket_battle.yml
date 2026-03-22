@@ -7,6 +7,8 @@
   components:
   - type: TicketBattleGameRule
     initialTickets: 100
+  - type: RespawnDeadRule
+    alwaysRespawnDead: true
   - type: RespawnTracker
     respawnDelay: 10
     deleteBody: false

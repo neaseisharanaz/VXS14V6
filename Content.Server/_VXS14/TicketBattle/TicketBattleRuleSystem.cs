@@ -89,6 +89,11 @@ public sealed class TicketBattleRuleSystem : GameRuleSystem<TicketBattleGameRule
 
             // Find the team spawn point.
             var spawnCoords = FindSpawnPoint(team);
+            if (!spawnCoords.IsValid(EntityManager))
+            {
+                Log.Warning($"[TicketBattle] Falling back to station coordinates for {ev.Player.Name} ({team}).");
+                spawnCoords = Transform(ev.Station).Coordinates;
+            }
 
             // Create mind.
             var mind = _mind.CreateMind(ev.Player.UserId, ev.Profile.Name);

@@ -39,7 +39,6 @@ public sealed class TicketDisplaySystem : GameRuleSystem<TicketDisplayComponent>
             {
                 DisplayTickets(captureRule, tickets);
                 ticketDisplay.LastDisplayTime = currentTime;
-                Dirty(uid, ticketDisplay);
             }
         }
     }

@@ -1,0 +1,9 @@
+- type: entity
+  id: CartridgeRocketABMSprintHE
+  name: AMR-1 OLS HH Sprint authorization keys
+  categories: [ HideSpawnMenu ]
+  parent: BaseCartridgeRocketAntiShip
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRocketABMSprintHE
+    deleteOnSpawn: true

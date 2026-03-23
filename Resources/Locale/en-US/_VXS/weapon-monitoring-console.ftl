@@ -25,6 +25,7 @@ weapon-monitoring-window-speed-value = {$value} m/s
 weapon-monitoring-window-category-missile = Anti-ship missile
 weapon-monitoring-window-category-bomb = Aerial bomb
 weapon-monitoring-window-category-gun = Naval gun
+weapon-monitoring-window-category-anti-missile = Anti-missile interceptor
 weapon-monitoring-window-planetary-disabled = Console is unavailable on planets.
 weapon-monitoring-window-flavor-left = WEAPONS MONITORING
 weapon-monitoring-window-flavor-right = Shipboard Tactical Network

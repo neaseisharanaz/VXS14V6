@@ -158,7 +158,9 @@ public sealed partial class WeaponMonitoringConsoleWindow : FancyWindow
 
         SetBombTargetButton.Disabled = !_consoleAvailable || entry.Category != WeaponMonitoringCategory.AerialBomb;
         ControlGunButton.Disabled = !_consoleAvailable || entry.Category != WeaponMonitoringCategory.NavalGun;
-        LaunchRocketButton.Disabled = !_consoleAvailable || entry.Category != WeaponMonitoringCategory.AntiShipMissile;
+        LaunchRocketButton.Disabled = !_consoleAvailable
+            || (entry.Category != WeaponMonitoringCategory.AntiShipMissile
+                && entry.Category != WeaponMonitoringCategory.AntiMissile);
         UpdateMarkerSelection();
     }
 
@@ -208,6 +210,7 @@ public sealed partial class WeaponMonitoringConsoleWindow : FancyWindow
             WeaponMonitoringCategory.AntiShipMissile => "weapon-monitoring-window-category-missile",
             WeaponMonitoringCategory.AerialBomb => "weapon-monitoring-window-category-bomb",
             WeaponMonitoringCategory.NavalGun => "weapon-monitoring-window-category-gun",
+            WeaponMonitoringCategory.AntiMissile => "weapon-monitoring-window-category-anti-missile",
             _ => "weapon-monitoring-window-value-unknown"
         };
     }
@@ -297,6 +300,7 @@ public sealed partial class WeaponMonitoringConsoleWindow : FancyWindow
             WeaponMonitoringCategory.AntiShipMissile => Color.OrangeRed,
             WeaponMonitoringCategory.AerialBomb => Color.LightGoldenrodYellow,
             WeaponMonitoringCategory.NavalGun => Color.CornflowerBlue,
+            WeaponMonitoringCategory.AntiMissile => Color.LimeGreen,
             _ => Color.White
         };
     }

@@ -1,0 +1,44 @@
+- type: entity
+  id: BulletRocketABMSprintHE
+  name: SPRINT OLS HH (RD)
+  parent: BaseBulletRocketAntiShip
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: VXS/Weapons/Ammunition/Explosives/sprint.rsi
+    layers:
+      - state: he
+  - type: RadarMarker
+    color: Green
+    shape: Triangle
+    showName: true
+  - type: MinimumDistanceTriggerCondition
+    minimumDistanceTiles: 4
+  - type: TriggerOnEnterGrid
+  - type: Explosive
+    explosionType: HardBomb
+    maxIntensity: 15
+    intensitySlope: 8
+    totalIntensity: 120
+  - type: TimedDespawn
+    lifetime: 30
+  - type: VXSActiveThrusterRadioHeading
+    seekRange: 200
+    rotationSpeed: 60
+    guidanceAlgorithm: PredictiveGuidance
+    acceleration: 50
+    topSpeed: 300
+    initialSpeed: 100
+    FOV: 90
+    retargetWindow: 3
+  - type: VXSCountermeasureResistance
+    mode: FovNarrowing
+    narrowedFOV: 20
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

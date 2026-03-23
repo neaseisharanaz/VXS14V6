@@ -1,0 +1,37 @@
+- type: entity
+  id: WeaponRocketABMSprint
+  name: AMR-1 OLS HH Sprint # ПРО ОЛС ГСН РВ
+  parent: BaseWeaponRocketAntiShip
+  description: Short-range anti-missile interceptor with optical locating system guidance head and radio proximity fuze. Designed exclusively to defeat incoming anti-ship missiles. Extremely fast with high maneuverability — virtually impossible to outrun. The radio fuze ensures detonation proximity kill without requiring a direct hit.
+  components:
+  - type: Sprite
+    sprite: VXS/Weapons/Ammunition/Explosives/sprint.rsi
+    state: he
+  - type: StaticPrice
+    price: 3500
+  - type: Gun
+    projectileSpeed: 100
+    fireRate: 1
+    minAngle: 0
+    maxAngle: 1
+    soundGunshot:
+      path: /Audio/Effects/explosion_small3.ogg
+      params:
+        pitch: 1.2
+        volume: 6
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      entities:
+        - CartridgeRocketABMSprintHE
+    capacity: 1
+    proto: CartridgeRocketABMSprintHE
+  - type: WeaponMonitoringProfile
+    category: AntiMissile
+    fov: 90
+    seekerType: Optical (OLS)
+    warheadType: HE
+    flightTime: 0
+    deviation: 0
+    projectileSpeed: 300
+    notes: Anti-missile interceptor. Engages incoming anti-ship missiles at short range. Has radio proximity fuze. Top speed 300 m/s after acceleration.

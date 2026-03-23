@@ -172,6 +172,7 @@ public sealed class WeaponMonitoringConsoleSystem : EntitySystem
                     Deviation = profile.Deviation,
                     ProjectileSpeed = profile.ProjectileSpeed,
                     LockedTarget = profile.Category == WeaponMonitoringCategory.AntiShipMissile
+                                   || profile.Category == WeaponMonitoringCategory.AntiMissile
                         ? GetLockedTargetDisplayName(uid)
                         : string.Empty,
                     Notes = profile.Notes,
@@ -207,7 +208,8 @@ public sealed class WeaponMonitoringConsoleSystem : EntitySystem
 
     private void OnAmmoShot(Entity<WeaponMonitoringProfileComponent> ent, ref AmmoShotEvent args)
     {
-        if (ent.Comp.Category != WeaponMonitoringCategory.AntiShipMissile)
+        if (ent.Comp.Category != WeaponMonitoringCategory.AntiShipMissile
+            && ent.Comp.Category != WeaponMonitoringCategory.AntiMissile)
             return;
 
         if (!_pendingRocketTargets.Remove(ent.Owner, out var targetUid))

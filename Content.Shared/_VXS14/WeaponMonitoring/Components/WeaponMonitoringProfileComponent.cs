@@ -37,4 +37,5 @@ public enum WeaponMonitoringCategory : byte
     AntiShipMissile,
     AerialBomb,
     NavalGun,
+    AntiMissile,
 }

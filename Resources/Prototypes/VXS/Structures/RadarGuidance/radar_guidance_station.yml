@@ -1,0 +1,60 @@
+# РЛС наведения — Radar Guidance Station
+# Illuminates targets for SARH (ПАРЛ ГСН) missiles.
+# When a target is locked a cyan strip marker appears on radar displays.
+
+- type: entity
+  id: VXSRadarGuidanceStation
+  name: 9S10 Radar Guidance Station
+  description: Semi-active radar illuminator (РЛС наведения). Locks onto the nearest hostile ship and provides continuous-wave illumination for ПАРЛ ГСН missiles. The illuminated target appears as a horizontal strip on all radar displays.
+  parent: BaseStructureDynamic
+  components:
+  - type: VXSRadarGuidanceStation
+    range: 800
+    enabled: true
+  - type: Sprite
+    sprite: VXS/Structures/rls.rsi
+    state: podkat
+    drawdepth: Objects
+  - type: Anchorable
+    delay: 5
+  - type: Pullable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 100
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Electronic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 250
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 2
+            max: 4
+  - type: Transform
+    anchored: false
+  - type: InteractionOutline
+  - type: ApcPowerReceiver
+    powerLoad: 5000
+  - type: ExtensionCableReceiver

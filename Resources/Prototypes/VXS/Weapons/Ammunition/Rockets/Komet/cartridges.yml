@@ -1,0 +1,21 @@
+# Komet — ПАРЛ ГСН (Semi-Active Radar Homing) missile cartridges
+
+- type: entity
+  id: CartridgeRocketAntiShipKometHE
+  name: Komet HE authorization keys
+  categories: [ HideSpawnMenu ]
+  parent: BaseCartridgeRocketAntiShip
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRocketAntiShipKometHE
+    deleteOnSpawn: true
+
+- type: entity
+  id: CartridgeRocketAntiShipKometEMP
+  name: Komet EMP authorization keys
+  categories: [ HideSpawnMenu ]
+  parent: BaseCartridgeRocketAntiShip
+  components:
+  - type: CartridgeAmmo
+    proto: BulletRocketAntiShipKometEMP
+    deleteOnSpawn: true

@@ -1,0 +1,91 @@
+- type: entity
+  id: AGM100XGuidedRocket
+  parent: BaseStructureDynamic
+  name: AGM-100X
+  description: An air-to-surface missile modified for space-based operation. Its warhead can engage any type of target and features television guidance.
+  components:
+  - type: Sprite
+    sprite: VXS/Weapons/Ammunition/Explosives/agm100.rsi
+    state: icon
+  - type: Pullable
+  - type: GuidedRocket
+    flightTime: 0
+    guidanceTime: 8
+    arrivalSound: /Audio/VXS/Artillery/aviabomb.ogg
+    impactEntity: BombMarkerAGM100
+    cameraPrototype: GuidedRocketCamera
+  - type: WeaponMonitoringProfile
+    category: AerialBomb
+    fov: 0
+    seekerType: TV guidance
+    warheadType: High explosive Fragmentation/Cumulative
+    flightTime: 8
+    deviation: 0
+    projectileSpeed: 0
+    notes: Operator-guided terminal attack munition.
+
+- type: entity
+  id: GuidedRocketCamera
+  parent: BaseMobJaunt
+  categories: [ HideSpawnMenu ]
+  name: guided rocket camera
+  description: A remote terminal guidance camera.
+  components:
+  - type: Sprite
+    sprite: /Textures/Objects/Fun/goldbikehorn.rsi
+    state: icon
+    visible: false
+  - type: GuidedRocketCamera
+  - type: GuidedRocketVision
+  - type: Physics
+    bodyType: KinematicController
+    bodyStatus: InAir
+    canCollide: false
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 2
+    baseAcceleration: 4
+    baseWeightlessModifier: 1
+    baseWeightlessAcceleration: 4
+    baseWeightlessFriction: 0
+    baseFriction: 0
+  - type: Eye
+    drawFov: false
+  - type: ContentEye
+    maxZoom: 1.5,1.5
+    targetZoom: 1.5,1.5
+
+- type: entity
+  id: BombMarkerAGM100
+  categories: [ HideSpawnMenu ]
+  name: Bomb marker AGM100
+  components:
+  - type: Sprite
+    sprite: /Textures/Objects/Fun/goldbikehorn.rsi
+    visible: false
+    state: icon
+  - type: TriggerOnSpawn
+  - type: DeleteOnTrigger
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: DemolitionCharge
+    totalIntensity: 350
+    intensitySlope: 10
+    maxIntensity: 50
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ProjectileGrenade
+    triggerKey: trigger
+    fillPrototype: PelletClusterLethalHeavy
+    capacity: 25
+    randomAngle: false
+    MaxVelocity: 35
+    MinVelocity: 20
+  - type: SmokeOnTrigger
+    keysIn:
+    - trigger
+    duration: 10
+    spreadAmount: 20
+  - type: TimedDespawn
+    lifetime: 15

@@ -112,7 +112,7 @@ public sealed class AerialBombSystem : EntitySystem
         return true;
     }
 
-    private bool TryResolveTargetMap(MapId? selectedMapId, SharedAerialBombComponent comp, out MapId target)
+    public bool TryResolveTargetMap(MapId? selectedMapId, string? preferredName, out MapId target)
     {
         if (selectedMapId is { } selected && IsPlanetMap(selected))
         {
@@ -120,7 +120,6 @@ public sealed class AerialBombSystem : EntitySystem
             return true;
         }
 
-        var preferredName = comp.SignalTargetMapName;
         if (!string.IsNullOrWhiteSpace(preferredName))
         {
             foreach (var mapId in _mapSystem.GetAllMapIds())
@@ -151,6 +150,11 @@ public sealed class AerialBombSystem : EntitySystem
 
         target = default;
         return false;
+    }
+
+    public bool TryResolveTargetMap(MapId? selectedMapId, SharedAerialBombComponent comp, out MapId target)
+    {
+        return TryResolveTargetMap(selectedMapId, comp.SignalTargetMapName, out target);
     }
 
     private bool IsPlanetMap(MapId mapId)

@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseMentalAction
+  id: ActionGuidedRocketReturn
+  name: Return to body
+  description: End terminal guidance and return to your body.
+  components:
+  - type: Action
+    icon: Interface/VerbIcons/eject.svg.192dpi.png
+  - type: InstantAction
+    event: !type:GuidedRocketReturnActionEvent

@@ -1,0 +1,12 @@
+uniform sampler2D SCREEN_TEXTURE;
+
+void fragment() {
+    highp vec4 color = zTextureSpec(SCREEN_TEXTURE, UV);
+    highp vec3 greyscale = vec3(zGrayscale(color.rgb));
+
+    highp vec2 coords = FRAGCOORD.xy;
+    highp vec2 noiseSeed = coords * SCREEN_PIXEL_SIZE * sin(TIME * 0.01 + 0.1);
+    highp float noise = (zRandom(noiseSeed).x - 0.5) * 0.03;
+
+    COLOR = vec4(clamp(greyscale + vec3(noise), 0.0, 1.0), color.a);
+}

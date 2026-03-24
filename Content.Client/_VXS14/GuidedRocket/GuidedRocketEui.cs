@@ -1,16 +1,18 @@
 using Content.Client.Eui;
+using Content.Client._VXS14.AerialBomb;
 using Content.Shared._VXS14.AerialBomb;
 using Content.Shared.Eui;
 using JetBrains.Annotations;
+using Robust.Shared.GameObjects;
 
-namespace Content.Client._VXS14.AerialBomb;
+namespace Content.Client._VXS14.GuidedRocket;
 
 [UsedImplicitly]
-public sealed class AerialBombEui : BaseEui, IAerialBombSelectionEui
+public sealed class GuidedRocketEui : BaseEui, IAerialBombSelectionEui
 {
     private readonly AerialBombWindow _window;
 
-    public AerialBombEui()
+    public GuidedRocketEui()
     {
         _window = new AerialBombWindow();
         _window.SetEui(this);

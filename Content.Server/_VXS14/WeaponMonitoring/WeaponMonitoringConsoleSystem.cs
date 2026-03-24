@@ -1,11 +1,13 @@
 using System.Numerics;
 using Content.Server._VXS14.AerialBomb;
+using Content.Server._VXS14.GuidedRocket;
 using Content.Server._VXS.ActiveRadioHeading.Components;
 using Content.Server._VXS.ActiveRadioHeading.Systems;
 using Content.Server.Shuttles.Components;
 using Content.Shared._ADT.SS40k.Turrets;
 using Content.Shared._ADT.SS40k.Turrets.Components;
 using Content.Shared._VXS14.AerialBomb;
+using Content.Shared._VXS14.GuidedRocket;
 using Content.Shared._VXS14.WeaponMonitoring;
 using Content.Shared._VXS14.WeaponMonitoring.Components;
 using Content.Shared._VXS.Manpads.Components;
@@ -30,6 +32,7 @@ public sealed class WeaponMonitoringConsoleSystem : EntitySystem
 {
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly AerialBombSystem _aerialBombSystem = default!;
+    [Dependency] private readonly GuidedRocketSystem _guidedRocketSystem = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedMindSystem _mindSystem = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
@@ -111,10 +114,11 @@ public sealed class WeaponMonitoringConsoleSystem : EntitySystem
         switch (args.Action)
         {
             case WeaponMonitoringControlAction.SetBombTarget:
-                if (!HasComp<SharedAerialBombComponent>(target))
-                    return;
+                if (HasComp<SharedAerialBombComponent>(target))
+                    _aerialBombSystem.TryOpenUi(target, actor);
+                else if (HasComp<SharedGuidedRocketComponent>(target))
+                    _guidedRocketSystem.TryOpenUi(target, actor);
 
-                _aerialBombSystem.TryOpenUi(target, actor);
                 break;
 
             case WeaponMonitoringControlAction.ControlGun:

@@ -7,3 +7,8 @@
   id: GreyscaleFullscreen
   kind: source
   path: "/Textures/Shaders/greyscale_fullscreen.swsl"
+
+- type: shader
+  id: GuidedRocketVisionFullscreen
+  kind: source
+  path: "/Textures/Shaders/guided_rocket_vision_fullscreen.swsl"

@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Client.Graphics;
+using Content.Shared._VXS14.GuidedRocket;
 using Content.Shared.Silicons.StationAi;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -35,6 +36,19 @@ public sealed class StationAiOverlay : Overlay
     public StationAiOverlay()
     {
         IoCManager.InjectDependencies(this);
+    }
+
+    protected override bool BeforeDraw(in OverlayDrawArgs args)
+    {
+        var playerEnt = _player.LocalEntity;
+        if (playerEnt != null &&
+            _entManager.TryGetComponent<GuidedRocketVisionComponent>(playerEnt, out var guidedVision) &&
+            guidedVision.Enabled)
+        {
+            return false;
+        }
+
+        return base.BeforeDraw(args);
     }
 
     protected override void Draw(in OverlayDrawArgs args)

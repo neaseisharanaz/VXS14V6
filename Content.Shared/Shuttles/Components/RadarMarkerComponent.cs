@@ -9,6 +9,10 @@ public enum RadarShape
     Circle,
     Square,
     Triangle,
+    /// <summary>
+    /// A horizontal bar/strip, used to show radar illumination locks.
+    /// </summary>
+    Line,
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

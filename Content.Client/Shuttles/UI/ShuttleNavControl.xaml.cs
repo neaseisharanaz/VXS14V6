@@ -371,6 +371,9 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
                     };
                     handle.DrawPrimitives(DrawPrimitiveTopology.TriangleFan, triangle, marker.Color);
                     break;
+                case RadarShape.Line:
+                    handle.DrawLine(point + new Vector2(-6, 0), point + new Vector2(6, 0), marker.Color);
+                    break;
             }
 
             if (marker.ShowName && marker.Name != null)

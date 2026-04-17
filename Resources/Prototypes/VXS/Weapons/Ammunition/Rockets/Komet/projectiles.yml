@@ -1,0 +1,86 @@
+# Komet — ПАРЛ ГСН (Semi-Active Radar Homing) missile projectiles
+# Guided by the 9S10 Radar Guidance Station (РЛС наведения).
+# Switches to inertial flight when the target leaves the guidance station's range.
+# Completely immune to all countermeasures.
+
+- type: entity
+  id: BulletRocketAntiShipKometHE
+  name: Komet HE (SARH)
+  parent: BaseBulletRocketAntiShip
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: VXS/Weapons/Ammunition/Explosives/bekas.rsi
+    layers:
+      - state: he
+  - type: RadarMarker
+    color: '#00FFFF'
+    shape: Triangle
+    showName: true
+  - type: Explosive
+    explosionType: HardBomb
+    maxIntensity: 60
+    intensitySlope: 12
+    totalIntensity: 1200
+  - type: MinimumDistanceTriggerCondition
+    minimumDistanceTiles: 20
+  - type: TimedDespawn
+    lifetime: 700
+  - type: VXSSemiActiveRadarHoming
+    stationSeekRange: 3000
+    rotationSpeed: 0.6
+    guidanceAlgorithm: PredictiveGuidance
+    acceleration: 8
+    topSpeed: 80
+    initialSpeed: 25
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  id: BulletRocketAntiShipKometEMP
+  name: Komet EMP (SARH)
+  parent: BaseBulletRocketAntiShip
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: VXS/Weapons/Ammunition/Explosives/bekas.rsi
+    layers:
+      - state: blank
+  - type: RadarMarker
+    color: '#00FFFF'
+    shape: Triangle
+    showName: true
+  - type: MinimumDistanceTriggerCondition
+    minimumDistanceTiles: 20
+  - type: Explosive
+    explosionType: HardBomb
+    maxIntensity: 50
+    intensitySlope: 10
+    totalIntensity: 100
+  - type: EmpOnTrigger
+    range: 10
+    energyConsumption: 10000
+    disableDuration: 60
+  - type: TimedDespawn
+    lifetime: 700
+  - type: VXSSemiActiveRadarHoming
+    stationSeekRange: 3000
+    rotationSpeed: 0.6
+    guidanceAlgorithm: PredictiveGuidance
+    acceleration: 8
+    topSpeed: 80
+    initialSpeed: 25
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

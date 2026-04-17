@@ -3,6 +3,8 @@ using Content.Server._VXS14.AerialBomb;
 using Content.Server._VXS14.GuidedRocket;
 using Content.Server._VXS.ActiveRadioHeading.Components;
 using Content.Server._VXS.ActiveRadioHeading.Systems;
+using Content.Server._VXS.RadarGuidance.Components;
+using Content.Server._VXS.RadarGuidance.Systems;
 using Content.Server.Shuttles.Components;
 using Content.Shared._ADT.SS40k.Turrets;
 using Content.Shared._ADT.SS40k.Turrets.Components;
@@ -265,6 +267,8 @@ public sealed class WeaponMonitoringConsoleSystem : EntitySystem
                 return TryResolveActiveRadarTarget(launcher, launcherXform, out target);
             case MissileSeekerMode.ActiveThruster:
                 return TryResolveThrusterTarget(launcher, launcherXform, out target);
+            case MissileSeekerMode.SemiActiveRadar:
+                return TryResolveSemiActiveRadarTarget(launcher, out target);
             default:
                 return false;
         }
@@ -299,6 +303,9 @@ public sealed class WeaponMonitoringConsoleSystem : EntitySystem
 
         if (projectilePrototype.TryGetComponent<VXSActiveThrusterRadioHeadingComponent>(out _, EntityManager.ComponentFactory))
             return MissileSeekerMode.ActiveThruster;
+
+        if (projectilePrototype.TryGetComponent<VXSSemiActiveRadarHomingComponent>(out _, EntityManager.ComponentFactory))
+            return MissileSeekerMode.SemiActiveRadar;
 
         return MissileSeekerMode.None;
     }
@@ -538,6 +545,50 @@ public sealed class WeaponMonitoringConsoleSystem : EntitySystem
         return closestTargetUid != null;
     }
 
+    private bool TryResolveSemiActiveRadarTarget(EntityUid launcher, out EntityUid target)
+    {
+        target = default;
+
+        if (!EntityManager.TryGetComponent<TransformComponent>(launcher, out var launcherXform))
+            return false;
+
+        var launcherPos = _transform.ToMapCoordinates(launcherXform.Coordinates).Position;
+        var mapId = launcherXform.MapID;
+
+        // Find the closest active guidance station on the same map.
+        var closestDist = float.MaxValue;
+        VXSRadarGuidanceStationComponent? bestStation = null;
+
+        var stationQuery = EntityQueryEnumerator<VXSRadarGuidanceStationComponent, TransformComponent>();
+        while (stationQuery.MoveNext(out _, out var station, out var stXform))
+        {
+            if (!station.Enabled || !station.LockedTarget.HasValue)
+                continue;
+
+            if (stXform.MapID != mapId)
+                continue;
+
+            var stPos = _transform.ToMapCoordinates(stXform.Coordinates).Position;
+            var dist = Vector2.Distance(launcherPos, stPos);
+            if (dist >= closestDist)
+                continue;
+
+            closestDist = dist;
+            bestStation = station;
+        }
+
+        if (bestStation?.LockedTarget == null)
+            return false;
+
+        var lockedTarget = bestStation.LockedTarget.Value;
+        if (TerminatingOrDeleted(lockedTarget))
+            return false;
+
+        var grid = ResolveTargetGrid(lockedTarget);
+        target = grid ?? lockedTarget;
+        return true;
+    }
+
     private EntityUid? ResolveTargetGrid(EntityUid target)
     {
         if (TryComp<MapGridComponent>(target, out _))
@@ -574,5 +625,6 @@ public sealed class WeaponMonitoringConsoleSystem : EntitySystem
         None,
         ActiveRadar,
         ActiveThruster,
+        SemiActiveRadar,
     }
 }

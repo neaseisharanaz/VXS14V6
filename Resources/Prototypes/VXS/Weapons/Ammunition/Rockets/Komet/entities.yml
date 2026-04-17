@@ -1,0 +1,57 @@
+# Komet — ПАРЛ ГСН (Semi-Active Radar Homing) launcher entities
+
+- type: entity
+  id: WeaponRocketAntiShipKometHE
+  name: ARR SARH Komet-HE
+  parent: BaseWeaponRocketAntiShip
+  description: Long-range semi-active radar guided anti-ship missile. Requires a 9S10 Radar Guidance Station (РЛС наведения) to be deployed on the launch platform. The missile homes on the illuminated target while it remains within the station's guidance range, then switches to inertial flight. Completely immune to all countermeasures.
+  components:
+  - type: Sprite
+    sprite: VXS/Weapons/Ammunition/Explosives/bekas.rsi
+    state: he
+  - type: StaticPrice
+    price: 5000
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      entities:
+        - CartridgeRocketAntiShipKometHE
+    capacity: 1
+    proto: CartridgeRocketAntiShipKometHE
+  - type: WeaponMonitoringProfile
+    category: AntiShipMissile
+    fov: 60
+    seekerType: Semi-Active Radar (SARH / ПАРЛ ГСН)
+    warheadType: HE
+    flightTime: 0
+    deviation: 0
+    projectileSpeed: 80
+    notes: Requires 9S10 Radar Guidance Station on the launch ship. Guided by the station while target is in range; inertial flight beyond that. Fully countermeasure-immune.
+
+- type: entity
+  id: WeaponRocketAntiShipKometEMP
+  name: ARR SARH Komet-EMP
+  parent: BaseWeaponRocketAntiShip
+  description: Long-range semi-active radar guided anti-ship missile with EMP warhead. Requires a 9S10 Radar Guidance Station (РЛС наведения) to be deployed on the launch platform. Completely immune to all countermeasures.
+  components:
+  - type: Sprite
+    sprite: VXS/Weapons/Ammunition/Explosives/bekas.rsi
+    state: blank
+  - type: StaticPrice
+    price: 6000
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      entities:
+        - CartridgeRocketAntiShipKometEMP
+    capacity: 1
+    proto: CartridgeRocketAntiShipKometEMP
+  - type: WeaponMonitoringProfile
+    category: AntiShipMissile
+    fov: 60
+    seekerType: Semi-Active Radar (SARH / ПАРЛ ГСН)
+    warheadType: EMP
+    flightTime: 0
+    deviation: 0
+    projectileSpeed: 80
+    notes: Requires 9S10 Radar Guidance Station on the launch ship. EMP warhead to disable enemy systems. Fully countermeasure-immune.
